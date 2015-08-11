@@ -1,0 +1,45 @@
+<div class="feed">
+<%= link_to "Refresh Feed", refresh_ig_path, class: "btn btn-primary" %>
+<br>
+<% if logged_in? && @user.subscriptions.blank? %>
+  <h4>You have not fed the beast yet. Use the search window
+  to satiate the beast!</h4>
+
+<% elsif logged_in? %>
+  <% @posts.each do |post| %>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="thumbnail">
+        <div class="user">
+        <%= image_tag(post.subscription.profile_pic, class: "img-rounded prof-pic") %>
+        <% if post.subscription.twitter_id.present? %>
+            <i class="fa fa-twitter"></i>
+          <% else %>
+            <i class="fa fa-instagram"></i>
+          <% end %>
+        <%= post.username %>
+        </div>
+    <% unless post.image.empty? %>
+      <% post.image.each do |image| %>
+        <%= image_tag(image, class: "img-rounded fix-width") %>
+      <% end %>
+    <% end %>
+    <div class="caption text-center">
+      <%= post.text %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% else %>
+  <div class="jumbotron">
+    <h1>WELCOME TO <strong>BEAST MODE!</strong></h1>
+    <p class="beast-mode">You must to sign in to feed the beast.</p>
+    <p>
+      <%= link_to "Sign In via Developer", "/auth/developer", class: "btn btn-primary" %>
+    </p>
+    <p>
+      <%= link_to "Sign In via Instagram", "/auth/instagram", class: "btn btn-primary" %>
+    </p>
+  </div>
+<% end %>
+</div>
