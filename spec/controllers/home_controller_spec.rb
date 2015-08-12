@@ -38,7 +38,6 @@ RSpec.describe HomeController, type: :controller do
          expect(response).to redirect_to twi_subscriptions_path(params: {twitter_search: "tinder"})
       end
     end
-  end
 
     context "instagram search" do
       it "redirects to instragram results index" do
