@@ -38,7 +38,6 @@ RSpec.describe HomeController, type: :controller do
          get :search, { website: "twitter", search: "tinder" }
 
          expect(response).to redirect_to twi_subscriptions_path(params: {twitter_search: "tinder"})
-         binding.pry
          # expect(@results.first.screen_name).to eq "Tinder"
        end
      end
